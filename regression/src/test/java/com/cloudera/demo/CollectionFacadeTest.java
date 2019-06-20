@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,7 +47,7 @@ public class CollectionFacadeTest {
 		for (int i = 0; i < 100; i++) {
 			Item item = creator.createNext();
 			items.add(item);
-		}asdfsaf
+		}
 		
 		target.create(items);
 	}
@@ -56,5 +57,6 @@ public class CollectionFacadeTest {
 		Item item = creator.createNext();
 		item.setName("Steve");
 		target.create(item);
+		Assert.fail("Bad result");
 	}
 }
