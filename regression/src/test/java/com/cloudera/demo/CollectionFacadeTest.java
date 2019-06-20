@@ -50,4 +50,11 @@ public class CollectionFacadeTest {
 		
 		target.create(items);
 	}
+	
+	@Test
+	public void testForDemo() {
+		Item item = creator.createNext();
+		item.setName("Steve");
+		target.create(item);
+	}
 }
