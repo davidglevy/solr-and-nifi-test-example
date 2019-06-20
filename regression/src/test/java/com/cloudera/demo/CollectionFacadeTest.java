@@ -1,5 +1,8 @@
 package com.cloudera.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,4 +40,14 @@ public class CollectionFacadeTest {
 		target.create(item);
 	}
 	
+	@Test
+	public void testCreateMany() {
+		List<Item> items = new ArrayList<>();
+		for (int i = 0; i < 100; i++) {
+			Item item = creator.createNext();
+			items.add(item);
+		}
+		
+		target.create(items);
+	}
 }

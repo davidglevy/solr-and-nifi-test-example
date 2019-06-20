@@ -2,6 +2,7 @@ package com.cloudera.demo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -120,6 +121,43 @@ public class CollectionFacade {
 		}
 	}
 
+	
+	public void create(List<Item> items) {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+
+			String itemStr = objectMapper.writeValueAsString(items);
+
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			
+			HttpPost httpPost = new HttpPost(createPostUrl());
+			
+		    StringEntity entity = new StringEntity(itemStr);
+		    httpPost.setEntity(entity);
+		    httpPost.setHeader("Accept", "application/json");
+		    httpPost.setHeader("Content-type", "application/json");
+		    
+		    
+		    CloseableHttpResponse response2 = httpclient.execute(httpPost);
+		    
+		    try {
+		    		HttpEntity entity2 = response2.getEntity();
+				try (InputStream inStream = entity2.getContent();
+						ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+					IOUtils.copy(inStream, output);
+
+					logger.info("Received:\n" + output.toString());
+				}
+			} finally {
+			    response2.close();
+			}
+			
+		} catch (Exception e) {
+			throw new RuntimeException("Unable to create new Solr item: " + e.getMessage());
+
+		}	
+	}
+	
 	public Integer getPort() {
 		return port;
 	}
@@ -135,5 +173,7 @@ public class CollectionFacade {
 	public void setHostname(String hostname) {
 		this.hostname = hostname;
 	}
+
+
 
 }
