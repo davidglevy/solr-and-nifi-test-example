@@ -46,7 +46,7 @@ public class CollectionFacadeTest {
 		for (int i = 0; i < 100; i++) {
 			Item item = creator.createNext();
 			items.add(item);
-		}
+		}asdfsaf
 		
 		target.create(items);
 	}
