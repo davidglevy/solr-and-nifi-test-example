@@ -55,7 +55,7 @@ public class CollectionFacadeTest {
 	@Test
 	public void testForDemo() {
 		Item item = creator.createNext();
-		item.setName("Steve");
+		item.setName("Steve 2");
 		target.create(item);
 		//Assert.fail("Bad result");
 	}
